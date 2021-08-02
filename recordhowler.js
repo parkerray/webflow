@@ -128,3 +128,13 @@ function getAllowance() {
     document.querySelector('.allowance').style.removeProperty('hide');
 }
 */
+
+//Formats record boxes based on values
+function formatRecords() {
+    records = document.querySelectorAll('.record');
+    records.forEach( record => {
+        if (record.innerText.includes('99.83.190.102') || record.innerText.includes('75.2.70.75') || record.innerText.includes('proxy-ssl.webflow.com')) {
+            record.style.backgroundColor = '#12b878';
+        } else record.style.backgroundColor = '#db4b68';
+    });
+}
