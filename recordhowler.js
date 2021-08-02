@@ -16,7 +16,7 @@ function runHowler() {
 
 //Gets the root domain without http://, https://, or any subdomains
 function getRootDomain(url) {
-    let psl = require('psl');
+    var psl = require('psl');
     let parsed = psl.parse(`https://www.adalocado.com/test`);
     return parsed.domain;
 }
