@@ -46,10 +46,10 @@ function getSubdomainRecords(url) {
 }
 
 //Lists DNS records
-function listRecords() {
-    for (const key in list){
+function listRecords(data) {
+    for (const key in data){
         if(obj.hasOwnProperty(key)){
-        console.log(`${key} : ${list[key]}`)
+        console.log(`${key} : ${data[key]}`)
     }
   }
 }
