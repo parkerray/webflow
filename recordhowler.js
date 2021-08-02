@@ -17,7 +17,7 @@ function runHowler() {
 //Gets the domain without http:// or https://
 function getDomain(url) {
     const domain = new URL(url);
-    return domain;
+    return domain.hostname;
 };
 
 //Gets the root domain without a subdomain
