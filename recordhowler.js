@@ -16,8 +16,8 @@ function runHowler() {
 
 //Gets the root domain without http://, https://, or any subdomains
 function getRootDomain(url) {
-    //let psl = require('psl');
-    return psl.get(url);
+    let parsed = psl.parse(url);
+    return parsed.domain;
 }
 
 
