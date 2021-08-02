@@ -48,14 +48,32 @@ function getSubdomainRecords(url) {
 
 function listRootRecords(arr) {
     arr.forEach(record => {
-        console.log(`${record.dnsType} : ${record.address}`)
+        console.log(`${record.dnsType} : ${record.address}`);
+        addRecordCard(record.dnsType, record.address);
     });
 }
 
 function listSubdomainRecords(arr) {
     arr.forEach(record => {
-        console.log(`${record.dnsType} : ${record.alias}`)
+        console.log(`${record.dnsType} : ${record.alias}`);
+        addRecordCard(record.dnsType, record.address);
     });
+}
+
+function addRecordCard(label, value) {
+    document.querySelector('.list-label').removeProperty('hide');
+    document.querySelector('#records').insertAdjacentHTML(beforeend, `
+        <div class="record">
+            <div class="record-info">
+                <div class="record-info-label">Type</div>
+                <div class="record-info-label">${label}</div>
+            </div>
+            <div class="record-info">
+                <div class="record-info-label">Value</div>
+                <div class="record-info-label">${value}</div>
+            </div>
+        </div>
+    `);
 }
 
 console.log(`the end`);
