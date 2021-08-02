@@ -62,7 +62,7 @@ function listSubdomainRecords(arr) {
 
 function addRecordCard(label, value) {
     document.querySelector('.list-label').style.removeProperty('hide');
-    document.querySelector('#records').insertAdjacentHTML(beforeend, `
+    document.querySelector('#records').insertAdjacentHTML('beforeend', `
         <div class="record">
             <div class="record-info">
                 <div class="record-info-label">Type</div>
