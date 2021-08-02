@@ -22,8 +22,8 @@ function getDomain(url) {
 
 //Gets the root domain without a subdomain
 function getRootDomain(domain) {
-    const rootDomain = domain.split(".").pop();
-    return rootDomain;
+    const rootDomain = domain.split(".").slice(1);
+    return rootDomain.join('');
 }
 
 //Fetches records from API
