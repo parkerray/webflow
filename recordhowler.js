@@ -75,7 +75,7 @@ function addRecordCard(label, value) {
 }
 
 //Prevents form submission with enter key and clicks the correct button instead
-$('form input').keydown(function (e) {
+document.querySelector("#domain").value.keydown(function (e) {
     if (e.keyCode == 13) {
         e.preventDefault();
         runHowler();
