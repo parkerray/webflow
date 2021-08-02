@@ -9,6 +9,14 @@ window.onload = function() {
 //Main program
 function runHowler() {
     const domainInput = document.querySelector("#domain").value;
+
+    let records = document.querySelectorAll('.record');
+
+    //Removes existing records from the DOM
+    while(records[0]) {
+        records[0].parentNode.removeChild(records[0]);
+    }
+
     getRootRecords(getRootDomain(domainInput));
     getSubdomainRecords(getDomain(domainInput));
 }
