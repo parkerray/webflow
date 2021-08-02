@@ -1,5 +1,3 @@
-console.log(`Hello world`);
-
 
 window.onload = function() {
     //Adds click listener to submit button
@@ -75,5 +73,3 @@ function addRecordCard(label, value) {
         </div>
     `);
 }
-
-console.log(`the end`);
