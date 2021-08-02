@@ -75,10 +75,10 @@ function addRecordCard(label, value) {
 }
 
 //Prevents form submission with enter key and clicks the correct button instead
-document.querySelector("#domain").value.keydown(function (e) {
-    if (e.keyCode == 13) {
+window.addEventListener('keydown',function(e){
+    if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'){
         e.preventDefault();
         runHowler();
         return false;
     }
-});
+},true);
