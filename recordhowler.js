@@ -30,6 +30,7 @@ function getRootDomain(domain) {
 function getRootRecords(url) {
     fetch(`https://www.whoisxmlapi.com/whoisserver/DNSService?apiKey=at_aXKafoG6V0tpe5ooMU0cxh7TZ0lNA&domainName=${url}&type=A,AAAA&outputFormat=JSON`, {
         method: 'GET',
+        mode: 'no-cors'
     })
     .then(response => response.json())
     .then(data => listRootRecords(data.DNSData.dnsRecords));
@@ -39,6 +40,7 @@ function getRootRecords(url) {
 function getSubdomainRecords(url) {
     fetch(`https://www.whoisxmlapi.com/whoisserver/DNSService?apiKey=at_aXKafoG6V0tpe5ooMU0cxh7TZ0lNA&domainName=${url}&type=CNAME&outputFormat=JSON`, {
         method: 'GET',
+        mode: 'no-cors'
     })
     .then(response => response.json())
     .then(data => listSubdomainRecords(data.DNSData.dnsRecords));
