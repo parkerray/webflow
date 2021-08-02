@@ -34,7 +34,7 @@ function getRootRecords(url) {
         method: 'GET',
     })
     .then(response => response.json())
-    .then(data => listRecords(data.DNSData.dnsRecords));
+    .then(data => listRootRecords(data.DNSData.dnsRecords));
 }
 
 //Fetches CNAME records from API
@@ -43,14 +43,19 @@ function getSubdomainRecords(url) {
         method: 'GET',
     })
     .then(response => response.json())
-    .then(data => listRecords(data.DNSData.dnsRecords));
+    .then(data => listSubdomainRecords(data.DNSData.dnsRecords));
 }
 
-function listRecords(arr) {
+function listRootRecords(arr) {
     arr.forEach(record => {
         console.log(`${record.dnsType} : ${record.address}`)
     });
-    console.log(arr);
+}
+
+function listSubdomainRecords(arr) {
+    arr.forEach(record => {
+        console.log(`${record.dnsType} : ${record.alias}`)
+    });
 }
 
 console.log(`the end`);
