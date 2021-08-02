@@ -56,7 +56,7 @@ function listRootRecords(arr) {
 function listSubdomainRecords(arr) {
     arr.forEach(record => {
         console.log(`${record.dnsType} : ${record.alias}`);
-        addRecordCard(record.dnsType, record.address);
+        addRecordCard(record.dnsType, record.alias);
     });
 }
 
