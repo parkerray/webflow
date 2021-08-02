@@ -16,10 +16,9 @@ function runHowler() {
 
 //Gets the root domain without http://, https://, or any subdomains
 function getRootDomain(url) {
-    let { strippedDomain } = new URL(url);
-    let rootDomain = strippedDomain.substring(strippedDomain.indexOf(".") + 1);
-    return rootDomain;
-}
+        const r =  /.*\.([^.]*[^0-9][^.]*\.[^.]*[^.0-9][^.]*$)/;
+        return s.replace(r, '$1');
+};
 
 
 //Fetches records from API
