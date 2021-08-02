@@ -64,11 +64,11 @@ function addRecordCard(label, value) {
         <div class="record">
             <div class="record-info">
                 <div class="record-info-label">Type</div>
-                <div class="record-info-label">${label}</div>
+                <div class="record-info-value">${label}</div>
             </div>
             <div class="record-info">
                 <div class="record-info-label">Value</div>
-                <div class="record-info-label">${value}</div>
+                <div class="record-info-value">${value}</div>
             </div>
         </div>
     `);
