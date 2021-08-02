@@ -11,8 +11,8 @@ window.onload = function() {
 //Main program
 function runHowler() {
     const domainInput = document.querySelector("#domain");
-    getRootRecords(domainInput);
-    getSubdomainRecords(domainInput);
+    getRootRecords(getRootDomain(domainInput));
+    getSubdomainRecords(getDomain(domainInput));
 }
 
 //Gets the domain without http:// or https://
@@ -44,9 +44,6 @@ function getSubdomainRecords(url) {
     .then(response => response.json())
     .then(data => listRecords(data));
 }
-
-console.log(getDomain(`https://www.adalocado.com/test`));
-console.log(getRootDomain(getDomain(url)));
 
 //Lists DNS records
 function listRecords() {
