@@ -28,8 +28,8 @@ function runHowler() {
             getSubdomainRecords(domainWithProtocol);
         } else {
             const domainWithEverything = `https://www.${domainInput}`;
-            getRootRecords(domainWithEverything);
-            getSubdomainRecords(domainWithEverything);
+            getRootRecords(getRootDomain(domainWithEverything));
+            getSubdomainRecords(GetDomain(domainWithEverything));
         }
     }
 }
