@@ -78,3 +78,9 @@ function addRecordCard(label, value) {
         </div>
     `);
 }
+
+window.addEventListener('keydown', function (event) {
+    if (event.key == 'Enter') {
+        runHowler();
+    }
+});
