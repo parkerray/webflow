@@ -32,8 +32,6 @@ function runHowler() {
             getSubdomainRecords(getDomain(domainWithEverything));
         }
     }
-
-    getAllowance();
 }
 
 //Checks if http:// or https:// exist
@@ -119,7 +117,8 @@ window.addEventListener('keydown', function(event) {
     }
 });
 
-//Gets the allowance left in our DNS account
+//Gets the allowance left in our DNS account\
+/*
 function getAllowance() {
     fetch(`https://user.whoisxmlapi.com/service/account-balance?apiKey=at_aXKafoG6V0tpe5ooMU0cxh7TZ0lNA`, {
         method: 'GET'
@@ -128,3 +127,4 @@ function getAllowance() {
     .then(data => document.querySelector('.allowance').innerText = `${data[9].credits} credits remaining this month`);
     document.querySelector('.allowance').style.removeProperty('hide');
 }
+*/
