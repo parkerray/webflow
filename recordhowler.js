@@ -11,8 +11,8 @@ window.onload = function() {
 //Main program
 function runHowler() {
     const domainInput = document.querySelector("#domain").value;
-    console.log(getRootRecords(getRootDomain(domainInput)));
-    console.log(getSubdomainRecords(getDomain(domainInput)));
+    getRootRecords(getRootDomain(domainInput));
+    getSubdomainRecords(getDomain(domainInput));
 }
 
 //Gets the domain without http:// or https://
@@ -47,6 +47,9 @@ function getSubdomainRecords(url) {
 }
 
 function listRecords(arr) {
+    arr.forEach(record => {
+        console.log(`${record.dnsType} : ${record.address}`)
+    });
     console.log(arr);
 }
 
