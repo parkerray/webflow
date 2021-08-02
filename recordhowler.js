@@ -19,8 +19,7 @@ function getRecords() {
         headers: {'Accept' : 'application/json'}
     })
     .then(response => response.json())
-    .then(data => document.getElementById("joke-text").innerHTML = `${data.x}`);
+    .then(data => console.log(data));
 }
 
 console.log(`the end`);
-console.log(getRecords());
