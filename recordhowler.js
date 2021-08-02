@@ -13,8 +13,10 @@ function runHowler() {
     let records = document.querySelectorAll('.record');
 
     //Removes existing records from the DOM
-    while(records[0]) {
-        records[0].parentNode.removeChild(records[0]);
+    if (records.length > 0) {
+        while(records[0]) {
+            records[0].parentNode.removeChild(records[0]);
+        }
     }
 
     getRootRecords(getRootDomain(domainInput));
