@@ -10,7 +10,7 @@ window.onload = function() {
 
 //Main program
 function runHowler() {
-    const domainInput = document.querySelector("#domain");
+    const domainInput = document.querySelector("#domain").value;
     getRootRecords(getRootDomain(domainInput));
     getSubdomainRecords(getDomain(domainInput));
 }
