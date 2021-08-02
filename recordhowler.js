@@ -24,7 +24,7 @@ function getDomain(url) {
 //Gets the root domain without a subdomain
 function getRootDomain(domain) {
     const hostName = getDomain(domain);
-    const rootDomain = hostName.split(".").slice(1);
+    const rootDomain = hostName.split('.').slice(1);
     return rootDomain.join('.');
 }
 
@@ -34,7 +34,7 @@ function getRootRecords(url) {
         method: 'GET',
     })
     .then(response => response.json())
-    .then(data => listRecords(data));
+    .then(data => listRecords(data.DNSData.dnsRecords));
 }
 
 //Fetches CNAME records from API
@@ -43,8 +43,11 @@ function getSubdomainRecords(url) {
         method: 'GET',
     })
     .then(response => response.json())
-    .then(data => listRecords(data));
+    .then(data => listRecords(data.DNSData.dnsRecords));
 }
 
+function listRecords(arr) {
+    console.log(arr);
+}
 
 console.log(`the end`);
