@@ -1,5 +1,6 @@
 console.log(`Hello world`);
 
+
 window.onload = function() {
     //Adds click listener to submit button
     const submitButton = document.querySelector("#submit");
@@ -15,7 +16,7 @@ function runHowler() {
 
 //Gets the root domain without http://, https://, or any subdomains
 function getRootDomain(url) {
-    let psl = require('psl');
+    //let psl = require('psl');
     return psl.get(extractHostname(url));
 }
 
