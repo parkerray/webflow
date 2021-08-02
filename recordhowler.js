@@ -32,8 +32,6 @@ function runHowler() {
             getSubdomainRecords(getDomain(domainWithEverything));
         }
     }
-
-    formatRecords();
 }
 
 //Checks if http:// or https:// exist
@@ -111,6 +109,7 @@ function addRecordCard(label, value) {
             </div>
         </div>
     `);
+    formatRecords();
 }
 
 window.addEventListener('keydown', function(event) {
