@@ -29,7 +29,7 @@ function runHowler() {
         } else {
             const domainWithEverything = `https://www.${domainInput}`;
             getRootRecords(getRootDomain(domainWithEverything));
-            getSubdomainRecords(GetDomain(domainWithEverything));
+            getSubdomainRecords(getDomain(domainWithEverything));
         }
     }
 }
