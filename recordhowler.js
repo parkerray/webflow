@@ -73,3 +73,12 @@ function addRecordCard(label, value) {
         </div>
     `);
 }
+
+//Prevents form submission with enter key and clicks the correct button instead
+$('form input').keydown(function (e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+        runHowler();
+        return false;
+    }
+});
