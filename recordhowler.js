@@ -13,6 +13,13 @@ function runHowler() {
     console.log(domain);
 }
 
+//Gets the root domain without http://, https://, or any subdomains
+function getRootDomain(url) {
+    let psl = require('psl');
+    return psl.get(extractHostname(url));
+}
+
+
 //Fetches records from API
 function getRecords() {
     fetch('https://www.whoisxmlapi.com/whoisserver/DNSService?apiKey=at_aXKafoG6V0tpe5ooMU0cxh7TZ0lNA&domainName=adalocado.com&type=A,AAAA,CNAME&outputFormat=JSON', {
@@ -22,4 +29,5 @@ function getRecords() {
     .then(data => console.log(data));
 }
 
+console.log(getRootDomain(`https://www.adalocado.com/test`));
 console.log(`the end`);
