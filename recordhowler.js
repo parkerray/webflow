@@ -18,3 +18,5 @@ function getRecords() {
     .then(response => response.json())
     .then(data => document.getElementById("joke-text").innerHTML = `${data.x}`);
 }
+
+console.log(`the end`);
