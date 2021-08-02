@@ -32,6 +32,8 @@ function runHowler() {
             getSubdomainRecords(getDomain(domainWithEverything));
         }
     }
+
+    formatRecords();
 }
 
 //Checks if http:// or https:// exist
