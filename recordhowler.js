@@ -23,7 +23,7 @@ function getDomain(url) {
 
 //Gets the root domain without a subdomain
 function getRootDomain(domain) {
-    const hostName = getDomain(url);
+    const hostName = getDomain(domain);
     const rootDomain = hostName.split(".").slice(1);
     return rootDomain.join('.');
 }
