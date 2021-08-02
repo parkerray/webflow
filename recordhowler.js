@@ -11,8 +11,8 @@ window.onload = function() {
 //Main program
 function runHowler() {
     const domainInput = document.querySelector("#domain").value;
-    getRootRecords(getRootDomain(domainInput));
-    getSubdomainRecords(getDomain(domainInput));
+    console.log(getRootRecords(getRootDomain(domainInput)));
+    console.log(getSubdomainRecords(getDomain(domainInput)));
 }
 
 //Gets the domain without http:// or https://
@@ -23,8 +23,9 @@ function getDomain(url) {
 
 //Gets the root domain without a subdomain
 function getRootDomain(domain) {
-    const rootDomain = domain.split(".").slice(1);
-    return rootDomain.join('');
+    const hostName = getDomain(url);
+    const rootDomain = hostName.split(".").slice(1);
+    return rootDomain.join('.');
 }
 
 //Fetches A & AAAA records from API
@@ -45,14 +46,5 @@ function getSubdomainRecords(url) {
     .then(data => listRecords(data));
 }
 
-//Lists DNS records
-function listRecords(data) {
-    for (const key in data){
-        if(obj.hasOwnProperty(key)){
-        console.log(`${key} : ${data[key]}`)
-    }
-  }
-}
 
-listRecords();
 console.log(`the end`);
