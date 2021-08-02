@@ -14,18 +14,18 @@ function runHowler() {
 
     if (hasProtocol(domainInput)) {
         if (hasSubdomain(domainInput)) {
-            getRootRecords(domainInput);
-            getSubdomainRecords(domainInput);
+            getRootRecords(getRootDomain(domainInput));
+            getSubdomainRecords(getDomain(domainInput));
         } else {
             const domainWithSubdomain = `https://www.${getDomain(domainInput)}`;
-            getRootRecords(domainWithSubdomain);
-            getSubdomainRecords(domainWithSubdomain);
+            getRootRecords(getRootDomain(domainWithSubdomain));
+            getSubdomainRecords(getDomain(domainWithSubdomain));
         }
     } else {
         if (hasSubdomain(domainInput)) {
             const domainWithProtocol = `https://${domainInput}`;
-            getRootRecords(domainWithProtocol);
-            getSubdomainRecords(domainWithProtocol);
+            getRootRecords(getRootDomain(domainWithProtocol));
+            getSubdomainRecords(getDomain(domainWithProtocol));
         } else {
             const domainWithEverything = `https://www.${domainInput}`;
             getRootRecords(getRootDomain(domainWithEverything));
