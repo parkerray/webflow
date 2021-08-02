@@ -10,14 +10,7 @@ window.onload = function() {
 function runHowler() {
     const domainInput = document.querySelector("#domain").value;
 
-    let records = document.querySelectorAll('.record');
-
-    //Removes existing records from the DOM
-    if (records.length > 0) {
-        while(records[0]) {
-            records[0].parentNode.removeChild(records[0]);
-        }
-    }
+    document.querySelectorAll('.record').forEach(e => e.remove());
 
     getRootRecords(getRootDomain(domainInput));
     getSubdomainRecords(getDomain(domainInput));
