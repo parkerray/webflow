@@ -12,8 +12,40 @@ function runHowler() {
 
     document.querySelectorAll('.record').forEach(e => e.remove());
 
-    getRootRecords(getRootDomain(domainInput));
-    getSubdomainRecords(getDomain(domainInput));
+    if (hasProtocol(domainInput)) {
+        if (hasSubdomain(domainInput)) {
+            getRootRecords(domainInput);
+            getSubdomainRecords(domainInput);
+        } else {
+            const domainWithSubdomain = `https://www.${getDomain(domainInput)}`;
+            getRootRecords(domainWithSubdomain);
+            getSubdomainRecords(domainWithSubdomain);
+        }
+    } else {
+        if (hasSubdomain(domainInput)) {
+            const domainWithProtocol = `https://${domainInput}`;
+            getRootRecords(domainWithProtocol);
+            getSubdomainRecords(domainWithProtocol);
+        } else {
+            const domainWithEverything = `https://www.${domainInput}`;
+            getRootRecords(domainWithEverything);
+            getSubdomainRecords(domainWithEverything);
+        }
+    }
+}
+
+//Checks if http:// or https:// exist
+function hasProtocol(domain) {
+    if (domain.includes('http')) {
+        return true;
+    } return false;
+}
+
+//Checks if www exists
+function hasSubdomain(domain) {
+    if (domain.includes('www')) {
+        return true;
+    } return false;
 }
 
 //Gets the domain without http:// or https://
