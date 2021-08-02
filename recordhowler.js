@@ -14,7 +14,7 @@ function runHowler() {
 
 //Fetches records from API
 function getRecords() {
-    fetch('https://www.whoisxmlapi.com/whoisserver/DNSService?apiKey=at_aXKafoG6V0tpe5ooMU0cxh7TZ0lNA&domainName=adalocado.com&type=_all', {
+    fetch('https://www.whoisxmlapi.com/whoisserver/DNSService?apiKey=at_aXKafoG6V0tpe5ooMU0cxh7TZ0lNA&domainName=adalocado.com&type=A,AAAA,CNAME', {
         method: 'GET',
         headers: {'Accept' : 'application/json'}
     })
