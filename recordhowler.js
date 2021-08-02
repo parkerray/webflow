@@ -9,6 +9,7 @@ window.onload = function() {
 //Main program
 function runHowler() {
     const domain = document.getElementById("domain").value;
+    getRecords();
     console.log(domain);
 }
 
