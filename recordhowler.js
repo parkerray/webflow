@@ -1,7 +1,7 @@
 console.log(`Hello world`);
 
 //Adds click listener to submit button
-document.getElementById("domain").addEventListener("click", runHowler);
+document.getElementById("submit").addEventListener("click", runHowler);
 
 //Main program
 function runHowler() {
