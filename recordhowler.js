@@ -14,12 +14,17 @@ function runHowler() {
     console.log(domain);
 }
 
-//Gets the root domain without http://, https://, or any subdomains
-function getRootDomain(url) {
-        const r =  /.*\.([^.]*[^0-9][^.]*\.[^.]*[^.0-9][^.]*$)/;
-        return s.replace(r, '$1');
+//Gets the domain without http:// or https://
+function getDomain(url) {
+    const domain = new URL(url);
+    return domain;
 };
 
+//Gets the root domain without a subdomain
+function getRootDomain(domain) {
+    const rootDomain = domain.split(".").pop();
+    return rootDomain;
+}
 
 //Fetches records from API
 function getRecords() {
@@ -30,5 +35,6 @@ function getRecords() {
     .then(data => console.log(data));
 }
 
-console.log(getRootDomain(`https://www.adalocado.com/test`));
+console.log(getDomain(`https://www.adalocado.com/test`));
+console.log(getRootDomain(`https://www.adalocado.com/test`))
 console.log(`the end`);
