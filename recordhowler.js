@@ -8,6 +8,19 @@ window.onload = function() {
 
 let currentRecords = [];
 
+let missingRecords = [
+    {   'label': 'A',
+        'value':'99.83.190.102'
+    },
+    {   'label': 'A',
+        'value':'75.2.70.75'
+    },
+    {
+        'label': 'CNAME',
+        'value': 'proxy-ssl.webflow.com'
+    }
+];
+
 //Main program
 function runHowler() {
     const domainInput = document.querySelector("#domain").value;
@@ -152,19 +165,6 @@ function formatRecords() {
         } else record.style.backgroundColor = '#ff8a8a';
     });
 }
-
-let missingRecords = [
-    {   'label': 'A',
-        'value':'99.83.190.102'
-    },
-    {   'label': 'A',
-        'value':'75.2.70.75'
-    },
-    {
-        'label': 'CNAME',
-        'value': 'proxy-ssl.webflow.com'
-    }
-];
 
 //Lists missing records
 function findMissingRecords(missing, current) {
