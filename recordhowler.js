@@ -110,7 +110,6 @@ function listSubdomainRecords(arr) {
 
 function addRecordCard(label, value) {
     document.querySelector('.list-label').classList.remove('hide');
-    document.querySelector('.color-key').classList.remove('hide');
     document.querySelector('#records').insertAdjacentHTML('beforeend', `
         <div class="record">
             <div class="record-info">
@@ -150,7 +149,7 @@ function formatRecords() {
     records.forEach( record => {
         if (record.innerText.includes('99.83.190.102') || record.innerText.includes('75.2.70.75') || record.innerText.includes('proxy-ssl.webflow.com')) {
             record.style.backgroundColor = '#38d996';
-        } else record.style.backgroundColor = '#ff6382';
+        } else record.style.backgroundColor = '#ff8a8a';
     });
 }
 
@@ -203,4 +202,4 @@ function addMissingRecordCard(label, value) {
     );
 }
 
-console.log(currentMissingRecords);
+console.log(findMissingRecords());
