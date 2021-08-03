@@ -189,4 +189,4 @@ function addMissingRecordCard(label, value) {
 }
 
 
-console.log(missingRecords);
+console.log(missingRecords[0]);
