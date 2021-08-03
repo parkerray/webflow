@@ -138,7 +138,7 @@ function formatRecords() {
     records.forEach( record => {
         if (record.innerText.includes('99.83.190.102') || record.innerText.includes('75.2.70.75') || record.innerText.includes('proxy-ssl.webflow.com')) {
             record.style.backgroundColor = '#38d996';
-        } else record.style.backgroundColor = '#ff6382';
+        } else record.style.backgroundColor = '#ff8a8a';
     });
 }
 
