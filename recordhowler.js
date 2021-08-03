@@ -1,13 +1,13 @@
 
 window.onload = function() {
-    //Adds click listener to submit button
+    //Adds click listener to submit button and input
     const submitButton = document.querySelector("#submit");
     const domainInput = document.querySelector("#domain");
     submitButton.addEventListener("click", runHowler);
 }
 
+//DNS record lists for comparison
 const currentRecords = [];
-
 const neededRecords = [
     {   
         'label': 'A',
@@ -23,28 +23,36 @@ const neededRecords = [
     }
 ];
 
+//Runs the program when the Enter key is pressed
+window.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        runHowler();
+    }
+});
+
 //Main program
 function runHowler() {
     const domainInput = document.querySelector("#domain").value;
 
+    //Clears DOM from previous run
     document.querySelectorAll('.record').forEach(e => e.remove());
     document.querySelectorAll('.expected-record').forEach(e => e.remove());
 
     if (hasProtocol(domainInput)) {
-        if (hasSubdomain(domainInput)) {
+        if (hasSubdomain(domainInput)) { //if http and www are in the URL
             getRootRecords(getRootDomain(domainInput));
             getSubdomainRecords(getDomain(domainInput));
-        } else {
+        } else { //if http is in the URL but www is not
             const domainWithSubdomain = `https://www.${getDomain(domainInput)}`;
             getRootRecords(getRootDomain(domainWithSubdomain));
             getSubdomainRecords(getDomain(domainWithSubdomain));
         }
     } else {
-        if (hasSubdomain(domainInput)) {
+        if (hasSubdomain(domainInput)) { //if http is not in the URL but www is
             const domainWithProtocol = `https://${domainInput}`;
             getRootRecords(getRootDomain(domainWithProtocol));
             getSubdomainRecords(getDomain(domainWithProtocol));
-        } else {
+        } else { //if neither http or www are in the URL
             const domainWithEverything = `https://www.${domainInput}`;
             getRootRecords(getRootDomain(domainWithEverything));
             getSubdomainRecords(getDomain(domainWithEverything));
@@ -102,27 +110,26 @@ function getSubdomainRecords(url) {
 }
 
 function listRootRecords(arr) {
+    const thisRecord = {};
     arr.forEach(record => {
         addRecordCard(record.dnsType, record.address);
-        let thisRecord = {};
         thisRecord.label = record.dnsType;
         thisRecord.value = record.address;
         currentRecords.push(thisRecord);
-        console.log(`listRootRecords - currentRecords: ${currentRecords}`)
     });
 }
 
 function listSubdomainRecords(arr) {
+    const thisRecord = {};
     arr.forEach(record => {
         addRecordCard(record.dnsType, record.alias);
-        let thisRecord = {};
         thisRecord.label = record.dnsType;
         thisRecord.value = record.alias;
         currentRecords.push(thisRecord);
-        console.log(`listSubdomainRecords - currentRecords: ${currentRecords}`)
     });
 }
 
+//Adds current records to the DOM
 function addRecordCard(label, value) {
     document.querySelector('.list-label').classList.remove('hide');
     document.querySelector('#records').insertAdjacentHTML('beforeend',
@@ -141,24 +148,6 @@ function addRecordCard(label, value) {
     );
     formatRecords();
 }
-
-window.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        runHowler();
-    }
-});
-
-//Gets the allowance left in our DNS account\
-/*
-function getAllowance() {
-    fetch(`https://user.whoisxmlapi.com/service/account-balance?apiKey=at_aXKafoG6V0tpe5ooMU0cxh7TZ0lNA`, {
-        method: 'GET'
-    })
-    .then(response => response.json())
-    .then(data => document.querySelector('.allowance').innerText = `${data[9].credits} credits remaining this month`);
-    document.querySelector('.allowance').style.removeProperty('hide');
-}
-*/
 
 //Formats record boxes based on values
 function formatRecords() {
@@ -185,6 +174,7 @@ function findMissingRecords(needList, currentList) {
     return result;
 }
 
+//Adds missing records to the DOM
 function addMissingRecordCard(label, value) {
     document.querySelector('#missingRecordsLabel').classList.remove('hide');
     document.querySelector('#missingRecords').insertAdjacentHTML('beforeend',
@@ -202,3 +192,17 @@ function addMissingRecordCard(label, value) {
     `
     );
 }
+
+
+
+//Gets the allowance left in our DNS account\
+/*
+function getAllowance() {
+    fetch(`https://user.whoisxmlapi.com/service/account-balance?apiKey=at_aXKafoG6V0tpe5ooMU0cxh7TZ0lNA`, {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => document.querySelector('.allowance').innerText = `${data[9].credits} credits remaining this month`);
+    document.querySelector('.allowance').style.removeProperty('hide');
+}
+*/
