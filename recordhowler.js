@@ -169,11 +169,20 @@ let missingRecords = [
 
 //Lists missing records
 function findMissingRecords() {
+    
+    let currentMissingRecords = missingRecords.filter(function (e) {
+        return e.includes('99.83.190.102') || e.includes('75.2.70.75') || e.includes('proxy-ssl.webflow.com');
+    });
+
+    return currentMissingRecords;
+    
+    /*
     let currentMissingRecords = [];
     currentMissingRecords = missingRecords.filter(x => !currentRecords.includes(x));
     currentMissingRecords.forEach( record => {
         addMissingRecordCard(record.label, record.value);
     });
+    */
 }
 
 function addMissingRecordCard(label, value) {
@@ -194,6 +203,4 @@ function addMissingRecordCard(label, value) {
     );
 }
 
-
 console.log(currentMissingRecords);
-console.log(currentRecords);
