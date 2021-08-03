@@ -6,9 +6,9 @@ window.onload = function() {
     submitButton.addEventListener("click", runHowler);
 }
 
-let currentRecords = [];
+const currentRecords = [];
 
-let neededRecords = [
+const neededRecords = [
     {   
         'label': 'A',
         'value':'99.83.190.102'
@@ -19,7 +19,7 @@ let neededRecords = [
     },
     {
         'label': 'CNAME',
-        'value': 'proxy-ssl.webflow.com'
+        'value': 'proxy-ssl.webflow.com.'
     }
 ];
 
@@ -172,7 +172,7 @@ function formatRecords() {
 
 //Lists missing records
 function findMissingRecords(needList, currentList) {
-    let result = [];
+    const result = [];
     for (let i = 0; i < needList.length; i++) {
       const needed = needList[i];
       const found = currentList.findIndex(
