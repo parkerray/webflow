@@ -7,7 +7,7 @@ window.onload = function() {
 }
 
 //DNS record lists for comparison
-const currentRecords = [];
+let currentRecords = [];
 const neededRecords = [
     {   
         'label': 'A',
