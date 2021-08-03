@@ -88,7 +88,6 @@ let currentRecords = [];
 
 function listRootRecords(arr) {
     arr.forEach(record => {
-        console.log(`${record.dnsType} : ${record.address}`);
         addRecordCard(record.dnsType, record.address);
         let thisRecord = {};
         thisRecord.label = record.dnsType;
@@ -99,7 +98,6 @@ function listRootRecords(arr) {
 
 function listSubdomainRecords(arr) {
     arr.forEach(record => {
-        console.log(`${record.dnsType} : ${record.alias}`);
         addRecordCard(record.dnsType, record.alias);
         let thisRecord = {};
         thisRecord.label = record.dnsType;
@@ -171,7 +169,8 @@ let currentMissingRecords = missingRecords.filter(x => !currentRecords.includes(
 
 //Lists missing records
 function findMissingRecords() {
-    let currentMissingRecords = missingRecords.filter(x => !currentRecords.includes(x));
+    let currentMissingRecords = [];
+    currentMissingRecords = missingRecords.filter(x => !currentRecords.includes(x));
     currentMissingRecords.forEach( record => {
         addMissingRecordCard(record.label, record.value);
     });
