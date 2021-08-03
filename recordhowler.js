@@ -36,7 +36,7 @@ function runHowler() {
     getDomains();
     setTimeout(()=>{
         console.log(findMissingRecords(neededRecords, currentRecords));
-        ;}, 5000
+        ;}, 2000
     );
 }
 
