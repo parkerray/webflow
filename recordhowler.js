@@ -123,7 +123,8 @@ function listSubdomainRecords(arr) {
 
 function addRecordCard(label, value) {
     document.querySelector('.list-label').classList.remove('hide');
-    document.querySelector('#records').insertAdjacentHTML('beforeend', `
+    document.querySelector('#records').insertAdjacentHTML('beforeend',
+    `
         <div class="record">
             <div class="record-info">
                 <div class="record-info-label">Type</div>
@@ -134,7 +135,8 @@ function addRecordCard(label, value) {
                 <div class="record-info-value">${value}</div>
             </div>
         </div>
-    `);
+    `
+    );
     formatRecords();
 }
 
@@ -171,10 +173,10 @@ function findMissingRecords(missing, current) {
     let result = [];
     for (let i = 0; i < missing.length; i++) {
         if (current.indexOf(missing[i]) === -1) {
+            
             result.push(current[i]);
         }
-        return result;
-    }
+    } return result;
 }
 
 function addMissingRecordCard(label, value) {
@@ -194,5 +196,3 @@ function addMissingRecordCard(label, value) {
     `
     );
 }
-
-console.log(findMissingRecords(missingRecords, currentRecords));
