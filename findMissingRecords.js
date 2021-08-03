@@ -1,4 +1,4 @@
-let missingRecords = [
+let neededRecords = [
     {   'label': 'A',
         'value':'99.83.190.102'
     },
@@ -21,10 +21,10 @@ let currentRecords = [
     }
 ];
 
-function findMissingRecords(missing, current) {
+function findMissingRecords(needed, current) {
     let result = [];
-    for (let i = 0; i < missing.length; i++) {
-        missing.findIndex( (record) => {
+    for (let i = 0; i < needed.length; i++) {
+        needed.findIndex(function (record) {
             if (record.value === -1) {
                 result.push(current[i]);
             };
@@ -33,4 +33,15 @@ function findMissingRecords(missing, current) {
     } return result;
 }
 
-findMissingRecords(missingRecords, currentRecords);
+findMissingRecords(neededRecords, currentRecords);
+
+[
+    {   
+        'label': 'A',
+        'value':'99.83.109.102'
+    },
+    {   
+        'label': 'A',
+        'value':'75.2.70.75'
+    }
+]
