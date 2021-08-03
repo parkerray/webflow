@@ -27,6 +27,7 @@ function findMissingRecords(needed, current) {
         needed.findIndex(function (record) {
             if (record.value === -1) {
                 result.push(current[i]);
+                console.log(current[i]);
             };
         })
 
@@ -34,14 +35,3 @@ function findMissingRecords(needed, current) {
 }
 
 findMissingRecords(neededRecords, currentRecords);
-
-[
-    {   
-        'label': 'A',
-        'value':'99.83.109.102'
-    },
-    {   
-        'label': 'A',
-        'value':'75.2.70.75'
-    }
-]
