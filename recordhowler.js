@@ -49,7 +49,7 @@ function runHowler() {
         }
     }
 
-    findMissingRecords();
+    findMissingRecords(missingRecords, currentRecords);
 }
 
 //Checks if http:// or https:// exist
