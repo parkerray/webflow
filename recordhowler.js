@@ -172,8 +172,7 @@ function formatRecords() {
 function findMissingRecords(missing, current) {
     let result = [];
     for (let i = 0; i < missing.length; i++) {
-        if (current.indexOf(missing[i]) === -1) {
-            
+        if (current.findIndex(missing[i].value) === -1) {
             result.push(current[i]);
         }
     } return result;
