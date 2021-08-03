@@ -147,8 +147,11 @@ function findMissingRecords() {
         {   'label': 'A',
             'value':'99.83.190.102'
         },
+        {   'label': 'A',
+            'value':'75.2.70.75'
+        },
         {
-            'label': '75.2.70.75',
+            'label': 'CNAME',
             'value': 'proxy-ssl.webflow.com'
         }
     ];
@@ -182,3 +185,5 @@ function addMissingRecordCard(label, value) {
         </div>
     `);
 }
+
+console.log(missingRecords);
