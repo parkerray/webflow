@@ -8,11 +8,13 @@ window.onload = function() {
 
 let currentRecords = [];
 
-let missingRecords = [
-    {   'label': 'A',
+let neededRecords = [
+    {   
+        'label': 'A',
         'value':'99.83.190.102'
     },
-    {   'label': 'A',
+    {   
+        'label': 'A',
         'value':'75.2.70.75'
     },
     {
@@ -49,7 +51,7 @@ function runHowler() {
         }
     }
 
-    findMissingRecords(missingRecords, currentRecords);
+    findMissingRecords(neededRecords, currentRecords);
 }
 
 //Checks if http:// or https:// exist
@@ -169,16 +171,18 @@ function formatRecords() {
 }
 
 //Lists missing records
-function findMissingRecords(missing, current) {
+function findMissingRecords(needList, currentList) {
     let result = [];
-    for (let i = 0; i < missing.length; i++) {
-        missing.findIndex(record => {
-            if (record.value === -1) {
-                result.push(current[i]);
-            };
-        })
-
-    } return result;
+    for (let i = 0; i < needList.length; i++) {
+      const needed = needList[i];
+      const found = currentList.findIndex(
+        record => record.value === needed.value
+      );
+      if (found === -1) {
+        result.push(needed);
+      }
+    }
+    return result;
 }
 
 function addMissingRecordCard(label, value) {
