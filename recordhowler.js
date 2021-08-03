@@ -34,10 +34,7 @@ window.addEventListener('keydown', function(event) {
 function runHowler() {
     currentRecords = [];
     getDomains();
-    setTimeout(()=>{
-        console.log(findMissingRecords(neededRecords, currentRecords));
-        ;}, 2000
-    );
+    setTimeout( () => { addAllMissingRecordCards(); }, 2000 );
 }
 
 //Gets all the domains
@@ -202,7 +199,7 @@ function addMissingRecordCard(label, value) {
     );
 }
 
-function addAllMissingRecordCards(missingList) {
+function addAllMissingRecordCards() {
     findMissingRecords(neededRecords, currentRecords).forEach(record => {
         addMissingRecordCard(record.label, record.value);
     });
