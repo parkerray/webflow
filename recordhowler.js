@@ -11,6 +11,7 @@ function runHowler() {
     const domainInput = document.querySelector("#domain").value;
 
     document.querySelectorAll('.record').forEach(e => e.remove());
+    document.querySelectorAll('.expected-record').forEach(e => e.remove());
 
     if (hasProtocol(domainInput)) {
         if (hasSubdomain(domainInput)) {
