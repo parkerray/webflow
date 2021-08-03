@@ -84,10 +84,16 @@ function getSubdomainRecords(url) {
     .then(data => listSubdomainRecords(data.DNSData.dnsRecords));
 }
 
+let currentRecords = [];
+
 function listRootRecords(arr) {
     arr.forEach(record => {
         console.log(`${record.dnsType} : ${record.address}`);
         addRecordCard(record.dnsType, record.address);
+        let thisRecord = {};
+        thisRecord.label = record.dnsType;
+        thisRecord.value = record.address;
+        currentRecords.push(thisRecord);
     });
 }
 
@@ -95,6 +101,10 @@ function listSubdomainRecords(arr) {
     arr.forEach(record => {
         console.log(`${record.dnsType} : ${record.alias}`);
         addRecordCard(record.dnsType, record.alias);
+        let thisRecord = {};
+        thisRecord.label = record.dnsType;
+        thisRecord.value = record.alias;
+        currentRecords.push(thisRecord);
     });
 }
 
@@ -157,21 +167,12 @@ let missingRecords = [
     }
 ];
 
+let currentMissingRecords = missingRecords.filter(x => !currentRecords.includes(x));
+
 //Lists missing records
 function findMissingRecords() {
-    records = document.querySelectorAll('.record');
-    
-    records.forEach( record => {
-        if (record.innerText.includes('99.83.190.102')) {
-            missingRecords.splice[0,1];
-        } else if (record.innerText.includes('75.2.70.75')) {
-            missingRecords.splice[1,1];
-        } else if (record.innerText.includes('proxy-ssl.webflow.com')) {
-            missingRecords.splice[2,1];
-        }
-    });
-
-    missingRecords.forEach( record => {
+    let currentMissingRecords = missingRecords.filter(x => !currentRecords.includes(x));
+    currentMissingRecords.forEach( record => {
         addMissingRecordCard(record.label, record.value);
     });
 }
@@ -195,4 +196,4 @@ function addMissingRecordCard(label, value) {
 }
 
 
-console.log(missingRecords);
+console.log(currentMissingRecords);
