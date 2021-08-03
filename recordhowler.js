@@ -139,3 +139,46 @@ function formatRecords() {
         } else record.style.backgroundColor = '#ff6382';
     });
 }
+
+//Lists missing records
+function findMissingRecords() {
+    records = document.querySelectorAll('.record');
+    missingRecords = [
+        {   'label': 'A',
+            'value':'99.83.190.102'
+        },
+        {
+            'label': '75.2.70.75',
+            'value': 'proxy-ssl.webflow.com'
+        }
+    ];
+    records.forEach( record => {
+        if (record.innerText.includes('99.83.190.102')) {
+            missingRecords.splice[0,1];
+        } else if (record.innerText.includes('75.2.70.75')) {
+            missingRecords.splice[1,1];
+        } else if (record.innerText.includes('proxy-ssl.webflow.com')) {
+            missingRecords.splice[2,1];
+        }
+    });
+
+    missingRecords.forEach( record => {
+        addMissingRecordCard(record.label, record.value);
+    });
+}
+
+function addMissingRecordCard(label, value) {
+    document.querySelectorAll('.list-label').style.removeProperty('hide');
+    document.querySelector('#missingRecords').insertAdjacentHTML('beforeend', `
+        <div class="expected-record">
+            <div class="record-info">
+                <div class="record-info-label">Type</div>
+                <div class="record-info-value">${label}</div>
+            </div>
+            <div class="record-info">
+                <div class="record-info-label">Value</div>
+                <div class="record-info-value">${value}</div>
+            </div>
+        </div>
+    `);
+}
