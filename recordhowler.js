@@ -175,7 +175,7 @@ function findMissingRecords() {
 }
 
 function addMissingRecordCard(label, value) {
-    document.querySelectorAll('.list-label').style.removeProperty('hide');
+    document.querySelector('#missingRecordsLabel').style.removeProperty('hide');
     document.querySelector('#missingRecords').insertAdjacentHTML('beforeend',
     `
         <div class="expected-record">
