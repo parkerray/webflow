@@ -143,7 +143,7 @@ function formatRecords() {
 //Lists missing records
 function findMissingRecords() {
     records = document.querySelectorAll('.record');
-    missingRecords = [
+    let missingRecords = [
         {   'label': 'A',
             'value':'99.83.190.102'
         },
