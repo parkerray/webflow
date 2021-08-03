@@ -116,9 +116,9 @@ function getSubdomainRecords(url) {
 }
 
 function listRootRecords(arr) {
-    let thisRecord = {};
     arr.forEach(record => {
         addRecordCard(record.dnsType, record.address);
+        let thisRecord = {};
         thisRecord.label = record.dnsType;
         thisRecord.value = record.address;
         currentRecords.push(thisRecord);
@@ -126,9 +126,9 @@ function listRootRecords(arr) {
 }
 
 function listSubdomainRecords(arr) {
-    let thisRecord = {};
     arr.forEach(record => {
         addRecordCard(record.dnsType, record.alias);
+        let thisRecord = {};
         thisRecord.label = record.dnsType;
         thisRecord.value = record.alias;
         currentRecords.push(thisRecord);
