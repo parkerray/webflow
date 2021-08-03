@@ -6,6 +6,8 @@ window.onload = function() {
     submitButton.addEventListener("click", runHowler);
 }
 
+let currentRecords = [];
+
 //Main program
 function runHowler() {
     const domainInput = document.querySelector("#domain").value;
@@ -84,8 +86,6 @@ function getSubdomainRecords(url) {
     .then(data => listSubdomainRecords(data.DNSData.dnsRecords));
 }
 
-let currentRecords = [];
-
 function listRootRecords(arr) {
     arr.forEach(record => {
         addRecordCard(record.dnsType, record.address);
@@ -93,6 +93,7 @@ function listRootRecords(arr) {
         thisRecord.label = record.dnsType;
         thisRecord.value = record.address;
         currentRecords.push(thisRecord);
+        console.log(`listRootRecords - currentRecords: ${currentRecords}`)
     });
 }
 
@@ -103,6 +104,7 @@ function listSubdomainRecords(arr) {
         thisRecord.label = record.dnsType;
         thisRecord.value = record.alias;
         currentRecords.push(thisRecord);
+        console.log(`listSubdomainRecords - currentRecords: ${currentRecords}`)
     });
 }
 
@@ -196,3 +198,4 @@ function addMissingRecordCard(label, value) {
 
 
 console.log(currentMissingRecords);
+console.log(currentRecords);
