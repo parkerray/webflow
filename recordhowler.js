@@ -33,8 +33,12 @@ window.addEventListener('keydown', function(event) {
 //Caller function to fix timing issues
 function runHowler() {
     currentRecords = [];
+    document.querySelector('.loading-animation').classList.remove('hide');
     getDomains();
-    setTimeout( () => { addAllMissingRecordCards(); }, 2000 );
+    setTimeout( () => { 
+        addAllMissingRecordCards(); 
+        document.querySelector('.loading-animation').classList.add('hide');
+    }, 2000 );
 }
 
 //Gets all the domains
