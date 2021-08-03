@@ -32,6 +32,7 @@ window.addEventListener('keydown', function(event) {
 
 //Caller function to fix timing issues
 function runHowler() {
+    currentRecords = [];
     getDomains();
     setTimeout(()=>{
         console.log(findMissingRecords(neededRecords, currentRecords));
