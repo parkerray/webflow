@@ -142,21 +142,23 @@ function formatRecords() {
     });
 }
 
+let missingRecords = [
+    {   'label': 'A',
+        'value':'99.83.190.102'
+    },
+    {   'label': 'A',
+        'value':'75.2.70.75'
+    },
+    {
+        'label': 'CNAME',
+        'value': 'proxy-ssl.webflow.com'
+    }
+];
+
 //Lists missing records
 function findMissingRecords() {
     records = document.querySelectorAll('.record');
-    let missingRecords = [
-        {   'label': 'A',
-            'value':'99.83.190.102'
-        },
-        {   'label': 'A',
-            'value':'75.2.70.75'
-        },
-        {
-            'label': 'CNAME',
-            'value': 'proxy-ssl.webflow.com'
-        }
-    ];
+    
     records.forEach( record => {
         if (record.innerText.includes('99.83.190.102')) {
             missingRecords.splice[0,1];
@@ -174,7 +176,8 @@ function findMissingRecords() {
 
 function addMissingRecordCard(label, value) {
     document.querySelectorAll('.list-label').style.removeProperty('hide');
-    document.querySelector('#missingRecords').insertAdjacentHTML('beforeend', `
+    document.querySelector('#missingRecords').insertAdjacentHTML('beforeend',
+    `
         <div class="expected-record">
             <div class="record-info">
                 <div class="record-info-label">Type</div>
@@ -185,8 +188,9 @@ function addMissingRecordCard(label, value) {
                 <div class="record-info-value">${value}</div>
             </div>
         </div>
-    `);
+    `
+    );
 }
 
 
-console.log(missingRecords[0]);
+console.log(missingRecords);
