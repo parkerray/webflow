@@ -167,8 +167,6 @@ let missingRecords = [
     }
 ];
 
-let currentMissingRecords = missingRecords.filter(x => !currentRecords.includes(x));
-
 //Lists missing records
 function findMissingRecords() {
     let currentMissingRecords = [];
