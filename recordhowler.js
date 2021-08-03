@@ -31,8 +31,8 @@ window.addEventListener('keydown', function(event) {
 });
 
 //Caller function to fix timing issues
-function runHowler() {
-    getDomains();
+async function runHowler() {
+    await getDomains();
     console.log(findMissingRecords(neededRecords, currentRecords));
 }
 
