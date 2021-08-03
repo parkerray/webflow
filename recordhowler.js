@@ -99,7 +99,7 @@ function listSubdomainRecords(arr) {
 
 function addRecordCard(label, value) {
     document.querySelector('.list-label').classList.remove('hide');
-    document.querySelector('#missingRecordsLabel').classList.remove('hide');
+    document.querySelector('.color-key').classList.remove('hide');
     document.querySelector('#records').insertAdjacentHTML('beforeend', `
         <div class="record">
             <div class="record-info">
