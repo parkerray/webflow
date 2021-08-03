@@ -30,8 +30,14 @@ window.addEventListener('keydown', function(event) {
     }
 });
 
-//Main program
+//Caller function to fix timing issues
 function runHowler() {
+    getDomains();
+    console.log(findMissingRecords(neededRecords, currentRecords));
+}
+
+//Gets all the domains
+function getDomains() {
     const domainInput = document.querySelector("#domain").value;
 
     //Clears DOM from previous run
@@ -58,9 +64,8 @@ function runHowler() {
             getSubdomainRecords(getDomain(domainWithEverything));
         }
     }
-
-    console.log(findMissingRecords(neededRecords, currentRecords));
 }
+
 
 //Checks if http:// or https:// exist
 function hasProtocol(domain) {
