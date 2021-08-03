@@ -31,9 +31,12 @@ window.addEventListener('keydown', function(event) {
 });
 
 //Caller function to fix timing issues
-async function runHowler() {
-    await getDomains();
-    console.log(findMissingRecords(neededRecords, currentRecords));
+function runHowler() {
+    getDomains();
+    setTimeout(()=>{
+        console.log(findMissingRecords(neededRecords, currentRecords));
+        ;}, 5000
+    );
 }
 
 //Gets all the domains
@@ -198,7 +201,11 @@ function addMissingRecordCard(label, value) {
     );
 }
 
-
+function addAllMissingRecordCards(missingList) {
+    findMissingRecords(neededRecords, currentRecords).forEach(record => {
+        addMissingRecordCard(record.label, record.value);
+    });
+}
 
 //Gets the allowance left in our DNS account\
 /*
