@@ -32,6 +32,8 @@ function runHowler() {
             getSubdomainRecords(getDomain(domainWithEverything));
         }
     }
+
+    findMissingRecords();
 }
 
 //Checks if http:// or https:// exist
@@ -185,5 +187,6 @@ function addMissingRecordCard(label, value) {
         </div>
     `);
 }
+
 
 console.log(missingRecords);
