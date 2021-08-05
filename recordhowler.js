@@ -200,7 +200,7 @@ function findIncorrectRecords(needList, currentList) {
 
 //Lists AAAA records
 function findAAAARecords(currentList) {
-	return currentList.some(i => i.label === 'AAAA');
+	return currentList.filter(i => i.label === 'AAAA');
 }
 
 //Adds missing records to the DOM
