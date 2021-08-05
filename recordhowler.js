@@ -372,7 +372,7 @@ document.querySelector('#copySnippet').innerText = copyText;
 
 function copy() {
     try {
-        await navigator.clipboard.writeText(copyText);
+        navigator.clipboard.writeText(copyText);
         copyButton.innerText = 'Copied!';
         resetCopyButton();
     } catch (err) {
