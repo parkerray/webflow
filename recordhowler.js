@@ -240,7 +240,7 @@ function handleResponseFunctions() {
     //Creates an array 'issuesFound' of all the record conflicts (missing, incorrect, AAAA)
     function identifyErrors() {
     if (incorrectRecords.length == 0) {
-        console.log('no incorrect records');
+        return false;
     } else {
         issuesFound.push({
             'name': 'incorrect records',
@@ -258,7 +258,7 @@ function handleResponseFunctions() {
     }
     
     if (AAAARecords.length == 0) {
-        console.log('no AAAA records')
+        return false;
     } else {
         issuesFound.push({
             'name': 'AAAA records',
