@@ -3,7 +3,9 @@ window.onload = function() {
     //Adds click listener to submit button and input
     const submitButton = document.querySelector("#submit");
     const domainInput = document.querySelector("#domain");
+    const copyButton = dosument.querySelector("#copyButton");
     submitButton.addEventListener("click", runHowler);
+    copyButton.addEventListener("click", updateClipboard(copyText));
 }
 
 //DNS record lists for comparison
@@ -22,6 +24,8 @@ const neededRecords = [
         'value': 'proxy-ssl.webflow.com.'
     }
 ];
+
+let issuesFound = [];
 
 //Runs the program when the Enter key is pressed
 window.addEventListener('keydown', function(event) {
@@ -48,6 +52,8 @@ function getDomains() {
     //Clears DOM from previous run
     document.querySelectorAll('.record').forEach(e => e.remove());
     document.querySelectorAll('.expected-record').forEach(e => e.remove());
+    document.querySelectorAll('.list-label').forEach(e => e.classList.add('hide'));
+    document.querySelector('#snippet').classList.add('hide');
 
     if (hasProtocol(domainInput)) {
         if (hasSubdomain(domainInput)) { //if http and www are in the URL
@@ -209,14 +215,157 @@ function addAllMissingRecordCards() {
     });
 }
 
-//Gets the allowance left in our DNS account\
-/*
-function getAllowance() {
-    fetch(`https://user.whoisxmlapi.com/service/account-balance?apiKey=at_aXKafoG6V0tpe5ooMU0cxh7TZ0lNA`, {
-        method: 'GET'
-    })
-    .then(response => response.json())
-    .then(data => document.querySelector('.allowance').innerText = `${data[9].credits} credits remaining this month`);
-    document.querySelector('.allowance').style.removeProperty('hide');
+/*----------------------------------------------------------------------
+This part of the code is where we check for a scenario and offer the right customer response!
+----------------------------------------------------------------------*/
+
+function handleResponseFunctions() {
+    let incorrectRecords = findIncorrectRecords(neededRecords, currentRecords);
+    let missingRecords = findMissingRecords(neededRecords, currentRecords);
+    let AAAARecords = findAAAARecords(currentRecords);
+
+    //Creates an array 'issuesFound' of all the record conflicts (missing, incorrect, AAAA)
+    function identifyErrors() {
+    if (incorrectRecords.length == 0) {
+        console.log('no incorrect records')
+    } else {
+        issuesFound.push({
+            'name': 'incorrect records',
+            'records': incorrectRecords
+        });
+    }
+    
+    if (missingRecords.length == 0) {
+        console.log('no missing records')
+    } else {
+        issuesFound.push({
+            'name': 'missing records',
+            'records': missingRecords
+        });
+    }
+    
+    if (AAAARecords.length == 0) {
+        console.log('no AAAA records')
+    } else {
+        issuesFound.push({
+            'name': 'AAAA records',
+            'records': AAAARecords
+        });
+    }
 }
-*/
+
+let responses = [];
+
+const cloudFlareProxyEnabled = (element) => element.name === 'AAAA records';
+
+function writeResponses(issuesFound) {
+    if (issuesFound.some(cloudFlareProxyEnabled)) {
+        responses.push({
+            'issue': 'AAAA records',
+            'response': `Your domain appears to be connected through Cloudflare with the Cloudflare Proxy enabled.
+
+Webflow Hosting is not compatible with the Cloudflare Proxy, so we recommend switching your DNS records to "DNS Only." To do that, click on the "orange cloud" next to each Webflow DNS record in your Cloudflare settings.
+
+For reference, here's our full documentation on using Cloudflare with Webflow hosting: Webflow + Cloudflare (https://university.webflow.com/integrations/cloudflare).`
+        })
+    } else {
+        for (let i = 0; i < issuesFound.length; i++) {
+            if (issuesFound[i].name === 'incorrect records') {
+    
+                let recordsToBeListed = issuesFound[i].records;
+                let stringRecordsToBeListed = [];
+    
+                for (let x = 0; x < recordsToBeListed.length; x++) {
+                    stringRecordsToBeListed.push(`
+Record ${x+1}:
+- Type: ${recordsToBeListed[x].label}
+- Value: ${recordsToBeListed[x].value}
+`)
+                }
+    
+                responses.push({
+                    'issue': issuesFound[i].name,
+                    'response': `
+The following DNS records are not Webflow records and should be removed from your domain:
+
+${stringRecordsToBeListed.join(`
+`)}
+`
+                })
+            } else if (issuesFound[i].name === 'missing records') {
+    
+                let recordsToBeListed = issuesFound[i].records;
+                let stringRecordsToBeListed = [];
+    
+                for (let x = 0; x < recordsToBeListed.length; x++) {
+                    stringRecordsToBeListed.push(`
+Record ${x+1}:
+- Type: ${recordsToBeListed[x].label}
+- Value: ${recordsToBeListed[x].value}
+`)
+                }
+                responses.push({
+                    'issue': issuesFound[i].name,
+                    'response': `
+The following DNS records are missing and will need to be added to your domain:
+
+${stringRecordsToBeListed.join(`
+`)}
+`
+                })
+            } else {
+                console.log('Something went wrong with the writeResponses function... Sorry :(')
+            }
+        }
+    }
+}
+
+identifyErrors();
+
+if (issuesFound.length > 0) {
+    writeResponses(issuesFound);
+    document.querySelector('#snippet').classList.remove('hide');
+}
+
+function combineMiddleText(responses) {
+    let onlyResponses = [];
+    responses.forEach(element => onlyResponses.push(element.response));
+    return onlyResponses.join(`
+    `);
+}
+
+let introText = `After taking a closer look at the current records that have propagated for your domain, we noticed potential conflicts that will need to be resolved with your domain provider.`
+
+let middleText = combineMiddleText(responses);
+
+let outroText = `Note: These changes will need to be made in your domain provider's settings (not in Webflow).
+
+Once you've made these updates, please allow up to 48 hours for the DNS records to update globally.
+
+If you're still having issues after 48 hours, let us know! If you're able to provide a screenshot of your DNS records, that might help us get to the bottom of things more quickly.`
+
+let copyText = `${introText}
+
+${middleText}
+
+${outroText}`
+
+console.log(copyText)
+}
+
+function updateClipboard(newClip) {
+    navigator.clipboard.writeText(newClip).then(function() {
+      /* clipboard successfully set */
+      copyButton.innerText = 'Copied!';
+      resetCopyButton();
+    }, function() {
+      copyButton.innerText = 'Error';
+      resetCopyButton();
+    });
+}
+
+function resetCopyButton() {
+    setTimeout( () => {
+        copyButton.innerText = 'Copy Snippet';
+    }, 2500);
+}
