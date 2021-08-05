@@ -371,22 +371,14 @@ document.querySelector('#copySnippet').innerText = copyText;
 } //End of handleResponseFunctions()
 
 function copy() {
-    let type = 'text/plain';
-    let blob = new Blob([copyText, { type }]);
-    let data = [new ClipboardItem({ [type]: blob })];
-
-    navigator.clipboard.write(data).then(
-        function () {
-        /* success */
-            copyButton.innerText = 'Copied!';
-            resetCopyButton();
-        },
-        function () {
-        /* failure */
-            copyButton.innerText = 'Error';
-            resetCopyButton();
-        }
-    );
+    try {
+        await navigator.clipboard.writeText(copyText);
+        copyButton.innerText = 'Copied!';
+        resetCopyButton();
+    } catch (err) {
+        copyButton.innerText = 'Error';
+        resetCopyButton();
+    }
 }
 
 function resetCopyButton() {
