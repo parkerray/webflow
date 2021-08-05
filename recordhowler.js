@@ -290,7 +290,8 @@ For reference, here's our full documentation on using Cloudflare with Webflow ho
                 let stringRecordsToBeListed = [];
     
                 for (let x = 0; x < recordsToBeListed.length; x++) {
-                    stringRecordsToBeListed.push(`Record ${x+1}:
+                    stringRecordsToBeListed.push(`
+Record ${x+1}:
 - Type: ${recordsToBeListed[x].label}
 - Value: ${recordsToBeListed[x].value}
 `)
@@ -300,8 +301,8 @@ For reference, here's our full documentation on using Cloudflare with Webflow ho
                     'issue': issuesFound[i].name,
                     'response': `The following DNS records are not Webflow records and should be removed from your domain:
 
-${stringRecordsToBeListed.join(``)}
-`
+${stringRecordsToBeListed.join(`
+`)}`
                 })
             } else if (issuesFound[i].name === 'missing records') {
     
@@ -309,7 +310,8 @@ ${stringRecordsToBeListed.join(``)}
                 let stringRecordsToBeListed = [];
     
                 for (let x = 0; x < recordsToBeListed.length; x++) {
-                    stringRecordsToBeListed.push(`Record ${x+1}:
+                    stringRecordsToBeListed.push(`
+Record ${x+1}:
 - Type: ${recordsToBeListed[x].label}
 - Value: ${recordsToBeListed[x].value}
 `)
