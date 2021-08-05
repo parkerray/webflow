@@ -290,10 +290,10 @@ For reference, here's our full documentation on using Cloudflare with Webflow ho
                 let stringRecordsToBeListed = [];
     
                 for (let x = 0; x < recordsToBeListed.length; x++) {
-                    stringRecordsToBeListed.push(`
-Record ${x+1}:
+                    stringRecordsToBeListed.push(`Record ${x+1}:
 - Type: ${recordsToBeListed[x].label}
 - Value: ${recordsToBeListed[x].value}
+
 `)
                 }
     
@@ -310,18 +310,17 @@ ${stringRecordsToBeListed.join(`
                 let stringRecordsToBeListed = [];
     
                 for (let x = 0; x < recordsToBeListed.length; x++) {
-                    stringRecordsToBeListed.push(`
-Record ${x+1}:
+                    stringRecordsToBeListed.push(`Record ${x+1}:
 - Type: ${recordsToBeListed[x].label}
 - Value: ${recordsToBeListed[x].value}
+
 `)
                 }
                 responses.push({
                     'issue': issuesFound[i].name,
                     'response': `The following DNS records are missing and will need to be added to your domain:
 
-${stringRecordsToBeListed.join(``)}
-`
+${stringRecordsToBeListed.join(``)}`
                 })
             } else {
                 console.log('Something went wrong with the writeResponses function... Sorry :(')
@@ -341,7 +340,7 @@ function combineMiddleText(responses) {
     let onlyResponses = [];
     responses.forEach(element => onlyResponses.push(element.response));
     return onlyResponses.join(`
-    `);
+`);
 }
 
 let introText = `After taking a closer look at the current records that have propagated for your domain, we noticed potential conflicts that will need to be resolved with your domain provider.`
@@ -379,3 +378,5 @@ function resetCopyButton() {
         copyButton.innerText = 'Copy Snippet';
     }, 2500);
 }
+
+console.log(copyText)
