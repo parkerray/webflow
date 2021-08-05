@@ -54,6 +54,7 @@ function getDomains() {
     document.querySelectorAll('.expected-record').forEach(e => e.remove());
     document.querySelectorAll('.list-label').forEach(e => e.classList.add('hide'));
     document.querySelector('#snippet').classList.add('hide');
+    document.querySelector('#copySnippet').innerText = 'Nothing to see here';
 
     if (hasProtocol(domainInput)) {
         if (hasSubdomain(domainInput)) { //if http and www are in the URL
