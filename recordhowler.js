@@ -365,8 +365,6 @@ ${middleText}
 
 ${outroText}`
 
-console.log(copyText)
-
 document.querySelector('#copySnippet').innerText = copyText;
 } //End of handleResponseFunctions()
 
