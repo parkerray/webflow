@@ -4,6 +4,8 @@ window.onload = function() {
     const submitButton = document.querySelector("#submit");
     const domainInput = document.querySelector("#domain");
     submitButton.addEventListener("click", runHowler);
+    const copyButton = document.querySelector("#copyButton")
+    copyButton.addEventListener("click", copy);
 }
 
 //DNS record lists for comparison
@@ -238,7 +240,7 @@ function handleResponseFunctions() {
     //Creates an array 'issuesFound' of all the record conflicts (missing, incorrect, AAAA)
     function identifyErrors() {
     if (incorrectRecords.length == 0) {
-        console.log('no incorrect records')
+        console.log('no incorrect records');
     } else {
         issuesFound.push({
             'name': 'incorrect records',
@@ -369,19 +371,26 @@ document.querySelector('#copySnippet').innerText = copyText;
 } //End of handleResponseFunctions()
 
 function copy() {
-    let textToCopy = document.querySelector('#copySnippet');
-    textToCopy.select();
-    document.execCommand("copy");
-    copyButton.innerText = 'Copied!';
-    resetCopyButton();
+    let type = 'text/plain';
+    let blob = new Blob([copyText, { type }]);
+    let data = [new ClipboardItem({ [type]: blob })];
+
+    navigator.clipboard.write(data).then(
+        function () {
+        /* success */
+            copyButton.innerText = 'Copied!';
+            resetCopyButton();
+        },
+        function () {
+        /* failure */
+            copyButton.innerText = 'Error';
+            resetCopyButton();
+        }
+    );
 }
 
 function resetCopyButton() {
     setTimeout( () => {
         copyButton.innerText = 'Copy Snippet';
     }, 2500);
-}
-
-window.onload = function() {
-    document.querySelector("#copyButton").addEventListener("click", copy);
 }
