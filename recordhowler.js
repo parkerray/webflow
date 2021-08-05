@@ -3,9 +3,7 @@ window.onload = function() {
     //Adds click listener to submit button and input
     const submitButton = document.querySelector("#submit");
     const domainInput = document.querySelector("#domain");
-    const copyButton = document.querySelector("#copyButton");
     submitButton.addEventListener("click", runHowler);
-    copyButton.addEventListener("click", updateClipboard(copyText));
 }
 
 //DNS record lists for comparison
@@ -42,6 +40,7 @@ function runHowler() {
     setTimeout( () => { 
         addAllMissingRecordCards(); 
         document.querySelector('.loading-animation').classList.add('hide');
+        handleResponseFunctions();
     }, 2000 );
 }
 
@@ -190,6 +189,18 @@ function findMissingRecords(needList, currentList) {
     return result;
 }
 
+//Lists incorrect records
+function findIncorrectRecords(needList, currentList) {
+	return currentList.filter(
+		item => !needList.some(i => i.value === item.value)
+	)
+}
+
+//Lists AAAA records
+function findAAAARecords(currentList) {
+	return currentList.some(i => i.label === 'AAAA');
+}
+
 //Adds missing records to the DOM
 function addMissingRecordCard(label, value) {
     document.querySelector('#missingRecordsLabel').classList.remove('hide');
@@ -253,6 +264,8 @@ function handleResponseFunctions() {
         });
     }
 }
+
+
 
 let responses = [];
 
@@ -344,28 +357,31 @@ Once you've made these updates, please allow up to 48 hours for the DNS records 
 
 If you're still having issues after 48 hours, let us know! If you're able to provide a screenshot of your DNS records, that might help us get to the bottom of things more quickly.`
 
-let copyText = `${introText}
+copyText = `${introText}
 
 ${middleText}
 
 ${outroText}`
 
 console.log(copyText)
-}
 
-function updateClipboard(newClip) {
-    navigator.clipboard.writeText(newClip).then(function() {
-      /* clipboard successfully set */
-      copyButton.innerText = 'Copied!';
-      resetCopyButton();
-    }, function() {
-      copyButton.innerText = 'Error';
-      resetCopyButton();
-    });
+document.querySelector('#copySnippet').innerText = copyText;
+} //End of handleResponseFunctions()
+
+function copy() {
+    let textToCopy = document.querySelector('#copySnippet');
+    textToCopy.select();
+    document.execCommand("copy");
+    copyButton.innerText = 'Copied!';
+    resetCopyButton();
 }
 
 function resetCopyButton() {
     setTimeout( () => {
         copyButton.innerText = 'Copy Snippet';
     }, 2500);
+}
+
+window.onload = function() {
+    document.querySelector("#copyButton").addEventListener("click", copy);
 }
