@@ -3,7 +3,7 @@ window.onload = function() {
     //Adds click listener to submit button and input
     const submitButton = document.querySelector("#submit");
     const domainInput = document.querySelector("#domain");
-    const copyButton = dosument.querySelector("#copyButton");
+    const copyButton = document.querySelector("#copyButton");
     submitButton.addEventListener("click", runHowler);
     copyButton.addEventListener("click", updateClipboard(copyText));
 }
