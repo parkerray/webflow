@@ -236,6 +236,7 @@ function handleResponseFunctions() {
     let incorrectRecords = findIncorrectRecords(neededRecords, currentRecords);
     let missingRecords = findMissingRecords(neededRecords, currentRecords);
     let AAAARecords = findAAAARecords(currentRecords);
+    issuesFound = []; //Resets this array
 
     //Creates an array 'issuesFound' of all the record conflicts (missing, incorrect, AAAA)
     function identifyErrors() {
